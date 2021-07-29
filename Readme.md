@@ -1,7 +1,7 @@
 # Проект «Киноман»
 
 * Студент: [Сергей Леонов](https://up.htmlacademy.ru/ecmascript/15/user/645527).
-* Наставник: `Неизвестно`.
+* Наставник: [Артур Галимов](https://htmlacademy.ru/profile/id1237543).
 
 ---
 
