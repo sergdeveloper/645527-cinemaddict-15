@@ -1,6 +1,6 @@
 import { getRandomInteger } from './movie';
 
-export const generateComment = () => {
+const generateComment = () => {
   return {
     "id": getRandomInteger (1, 5),
     "author": "Ilya O'Reilly",
@@ -8,4 +8,8 @@ export const generateComment = () => {
     "date": "2019-05-11T16:12:32.554Z",
     "emotion": "smile",
   };
+};
+
+export const generateComments = () => {
+  return new Array(getRandomInteger(1, 5)).fill().map(generateComment);
 };

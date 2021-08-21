@@ -1,3 +1,4 @@
+import { generateComments } from './comment.js';
 export const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -8,11 +9,10 @@ const descriptionText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit
 
 const descriptionArray = descriptionText.split('. ');
 
-
 export const generateMovie = () => {
   return {
     id: getRandomInteger (0, 100),
-    comments: [1,2,3],
+    comments: generateComments(),
     filmInfo: {
       title: 'A Little Pony Without The Carpet',
       alternative_title: 'Laziness Who Sold Themselves',

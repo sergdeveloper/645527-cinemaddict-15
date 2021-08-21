@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
-import { render } from '../main.js';
-import { generateComment } from '../mock/comment.js';
+import {createElement} from '../utils.js';
 
-export const createUserCommentTemplate = (singleComment) => {
+const createUserCommentTemplate = (singleComment) => {
   const {author, comment, date, emotion} = singleComment;
   return`<li class="film-details__comment">
     <span class="film-details__comment-emoji">
@@ -19,7 +18,12 @@ export const createUserCommentTemplate = (singleComment) => {
   </li>`;
 };
 
-export const createPopupMovieTemplate = (singleMovie) => {
+const createAllUserCommentsTemplate = (comments) => {
+  return comments.map((singleComment) => createUserCommentTemplate(singleComment)).join('');
+};
+
+const createPopupMovieTemplate = (singleMovie) => {
+
   function getTimeFromMins(time) {
     const hours = Math.trunc(time/60);
     const minutes = time % 60;
@@ -27,17 +31,7 @@ export const createPopupMovieTemplate = (singleMovie) => {
   }
 
   const { filmInfo: { title, description, poster, total_rating, genre, director, writers, runtime, actors, release:{date, release_country}},comments, user_details:{watchlist, already_watched, favorite} } = singleMovie;
-  const commentaries = new Array(comments.length).fill().map(generateComment);
-  const createAllComments = (number) => {
-    setTimeout(() => {
-      const commentList = document.querySelector('.film-details__comments-list');
-      for (let i = 0; i<number; i++){
-        render (commentList, createUserCommentTemplate(commentaries[i]), 'beforeend');
-      }
-    }, 50);
-  };
-
-  createAllComments(commentaries.length);
+  const allComments = createAllUserCommentsTemplate(comments);
 
   const watchClassName = watchlist
     ? 'film-details__control-button--active'
@@ -126,7 +120,7 @@ export const createPopupMovieTemplate = (singleMovie) => {
         <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${comments.length}</span></h3>
 
         <ul class="film-details__comments-list">
-
+          ${allComments}
         </ul>
 
         <div class="film-details__new-comment">
@@ -163,3 +157,26 @@ export const createPopupMovieTemplate = (singleMovie) => {
   </form>
 </section>`;
 };
+
+export default class MoviePopup {
+  constructor(singleMovie) {
+    this._singleMovie = singleMovie;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createPopupMovieTemplate(this._singleMovie);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
