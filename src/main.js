@@ -6,15 +6,14 @@ import MovieCardView from './view/movie-card.js';
 import ShowMoreButtonView from './view/show-more-button.js';
 import FooterStatsTemplateView from './view/footer-stats.js';
 import MoviePopupView from './view/popup.js';
+import EmptyFilmsView from './view/empty-films.js';
 import { generateMovie } from './mock/movie.js';
-
 
 const CARDS_COUNT = 25;
 const CARDS_PER_STEP = 5;
 const CARDS_COUNT_SPECIAL = 2;
 const POPUP_OPEN_CLASSES = ['film-card__poster', 'film-card__title', 'film-card__comments'];
 const movies = new Array(CARDS_COUNT).fill().map(generateMovie);
-
 
 const siteBody = document.body;
 const siteHeaderElement = document.querySelector('.header');
@@ -93,6 +92,14 @@ const renderMovie = (container, movie) => {
   renderElement(moviesListContainer, movieComponent.getElement(), RenderPosition.BEFOREEND);
 };
 
+
+const renderAllMovies = ()=>{
+
+  if (movies.length === 0) {
+    renderElement(siteMainElement, new EmptyFilmsView().getElement(), RenderPosition.BEFOREEND);
+    return;
+  }
+
 for (let i = 0; i < Math.min(movies.length, CARDS_PER_STEP); i++) {
   renderMovie(moviesListContainer, movies[i]);
 }
@@ -121,5 +128,7 @@ for (let i = 0; i < CARDS_COUNT_SPECIAL; i++) {
 for (let i = 0; i < CARDS_COUNT_SPECIAL; i++) {
   renderElement (moviesListContainerRated, new MovieCardView(movies[i]).getElement(), RenderPosition.BEFOREEND);
 }
+}
 
+renderAllMovies();
 renderElement (siteFooterStatistics, new FooterStatsTemplateView(movies.length).getElement(), RenderPosition.BEFOREEND);
