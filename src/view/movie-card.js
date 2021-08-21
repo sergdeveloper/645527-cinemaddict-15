@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
-export const createMovieCardTemplate = (singleMovie) => {
+import {createElement} from '../utils.js';
+const createMovieCardTemplate = (singleMovie) => {
 
   const { filmInfo: { title, description, poster, total_rating, genre, runtime, release:{date}}, comments }  = singleMovie;
   function getTimeFromMins(time) {
@@ -26,3 +27,27 @@ export const createMovieCardTemplate = (singleMovie) => {
   </div>
 </article>`;
 };
+
+
+export default class MovieCard {
+  constructor(singleMovie) {
+    this._singleMovie = singleMovie;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return createMovieCardTemplate(this._singleMovie);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
