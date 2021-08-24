@@ -1,4 +1,4 @@
-import { getRandomInteger } from './movie';
+import { getRandomInteger } from '../utils/common.js';
 
 const generateComment = () => {
   return {
