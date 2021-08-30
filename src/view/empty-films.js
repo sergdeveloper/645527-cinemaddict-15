@@ -9,7 +9,7 @@ const createEmprtyFilmsTemplate = () => {
 };
 
 
-export default class NoTask extends AbstractView {
+export default class NoMovie extends AbstractView {
   getTemplate() {
     return createEmprtyFilmsTemplate();
   }
