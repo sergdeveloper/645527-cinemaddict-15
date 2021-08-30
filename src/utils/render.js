@@ -4,6 +4,7 @@ const RenderPosition = {
   AFTERBEGIN: 'afterbegin',
   AFTEREND: 'afterend',
   BEFOREEND: 'beforeend',
+  BEFOREBEGIN: 'beforebegin',
 };
 
 const createElement = (template) => {
@@ -32,6 +33,9 @@ const render = (container, element, place = RenderPosition.BEFOREEND) => {
     case RenderPosition.BEFOREEND:
       container.append(element);
       break;
+    case RenderPosition.BEFOREBEGIN:
+      container.before(element);
+      break;
   }
 };
 
@@ -44,4 +48,22 @@ const remove = (component) => {
   component.removeElement();
 };
 
-export {createElement, render, RenderPosition, remove};
+const replace = (newChild, oldChild) => {
+  if (oldChild instanceof Abstract) {
+    oldChild = oldChild.getElement();
+  }
+
+  if (newChild instanceof Abstract) {
+    newChild = newChild.getElement();
+  }
+
+  const parent = oldChild.parentElement;
+
+  if (parent === null || oldChild === null || newChild === null) {
+    throw new Error('Cant replace unexisting elements');
+  }
+
+  parent.replaceChild(newChild, oldChild);
+};
+
+export {createElement, render, RenderPosition, remove, replace};
