@@ -25,12 +25,18 @@ export default class Sorting extends Abstract {
     return createSortingTemplate();
   }
 
+  _changeChosenSort(button) {
+    this.getElement().querySelector('.sort__button--active').classList.remove('sort__button--active');
+    button.classList.add('sort__button--active');
+  }
+
   _sortingTypeChangeHandler(evt) {
     if (evt.target.tagName !== 'A') {
       return;
     }
 
     evt.preventDefault();
+    this._changeChosenSort(evt.target);
     this._callback.sortingTypeChange(evt.target.dataset.sortingType);
   }
 
