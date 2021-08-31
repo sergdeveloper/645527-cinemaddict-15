@@ -68,14 +68,14 @@ export default class FilmList {
   _sortFilms(sortingType) {
     switch (sortingType) {
       case SortingType.DATE:
-        this._movies = getSortedMoviesByDate(this._films);
+        this._films = getSortedMoviesByDate(this._films);
         break;
       case SortingType.RATING:
 
-        this._movies = getSortedMoviesByRating(this._films);
+        this._films = getSortedMoviesByRating(this._films);
         break;
       default:
-        this._movies = this._sourcedFilms.slice();
+        this._films = this._sourcedFilms.slice();
     }
 
     this._currentSortingType = sortingType;
