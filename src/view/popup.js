@@ -1,5 +1,8 @@
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import Smart from './smart.js';
+dayjs.extend(relativeTime)
+
 
 const Emote = {
   SMILE: 'smile',
@@ -37,7 +40,7 @@ const createUserCommentTemplate = (data) => {
       <p class="film-details__comment-text">${comment}</p>
       <p class="film-details__comment-info">
         <span class="film-details__comment-author">${author}</span>
-        <span class="film-details__comment-day">${dayjs(date).format('YYYY/MM/DD HH:mm')}</span>
+        <span class="film-details__comment-day">${dayjs().to(dayjs(date))}</span>
         <button class="film-details__comment-delete">Delete</button>
       </p>
     </div>
