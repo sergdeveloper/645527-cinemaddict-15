@@ -75,10 +75,6 @@ export default class Film {
     this._filmPopupComponent.setCloseButtonClickHandler(this._handlePopupCloseButtonClick);
   }
 
-  _removeFilmCardHandlers() {
-    this._filmCardComponent.removeHandlers();
-  }
-
    _hidePopup() {
      this._mode = Mode.DEFAULT;
      this._siteBody.classList.remove('hide-overflow');
