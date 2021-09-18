@@ -21,7 +21,7 @@ const MenuItem = {
   STATS: 'stats',
 };
 const ActivePageVariant = {
-  movies: 'movies',
+  MOVIES: 'movies',
   STATS: 'STATS',
 };
 const AUTHORIZATION = 'Basic l2or9kjk4pzt3lo';
@@ -47,17 +47,17 @@ const filterPresenter = new FilterPresenter(siteMenuComponent, moviesModel, filt
 filterPresenter.init();
 const movieListPresenter = new MovieListPresenter(siteHeader, siteMain, moviesModel, filtersModel, commentsModel, apiWithProvider);
 movieListPresenter.init();
-let currentActivePageVariant = ActivePageVariant.movies;
+let currentActivePageVariant = ActivePageVariant.MOVIES;
 let statsComponent = null;
 const handleSiteMenuClick = (menuItem) => {
-  if (menuItem === MenuItem.STATS && currentActivePageVariant === ActivePageVariant.movies) {
+  if (menuItem === MenuItem.STATS && currentActivePageVariant === ActivePageVariant.MOVIES) {
     currentActivePageVariant = ActivePageVariant.STATS;
     MovieListPresenter.destroy();
     filtersModel.setFilter(UpdateType.MAJOR, FilterType.ALL);
     statsComponent = new StatsView(moviesModel.getmovies());
     render(siteMain, statsComponent);
   } else if (menuItem !== MenuItem.STATS && currentActivePageVariant === ActivePageVariant.STATS) {
-    currentActivePageVariant = ActivePageVariant.movies;
+    currentActivePageVariant = ActivePageVariant.MOVIES;
     remove(statsComponent);
     MovieListPresenter.init();
     filtersModel.setFilter(UpdateType.MAJOR, FilterType[menuItem.toUpperCase()]);
