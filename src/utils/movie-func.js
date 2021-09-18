@@ -1,0 +1,16 @@
+const MOST_COMMENTED_MOVIES_AMOUNT = 2;
+const TOP_RATED_MOVIES_AMOUNT = 2;
+const getTopRatedMovies = (movies) => {movies.slice().sort((second, first) => first.movieInfo.totalRating - second.movieInfo.totalRating).slice(0, TOP_RATED_MOVIES_AMOUNT);
+};
+const getMostCommentedMovies = (movies) => {movies.slice().sort((second, first) => first.comments.length - second.comments.length).slice(0, MOST_COMMENTED_MOVIES_AMOUNT);
+};
+const getAlreadywatchedMoviesAmount = (movies) => {movies.filter((movie) => movie.userDetails.alreadyWatched).length;
+};
+const getWholewatchedMoviesRuntime = (movies) => {movies.reduce((accumulator, currentValue) => {currentValue.userDetails.alreadyWatched ? accumulator + currentValue.movieInfo.runtime : accumulator;
+}, 0);
+};
+const getSortedMoviesByDate = (movies) => {movies.slice().sort((firstmovie, secondmovie) => secondmovie.movieInfo.releaseDate - firstmovie.movieInfo.releaseDate);
+};
+const getSortedMoviesByRating = (movies) => {movies.slice().sort((firstmovie, secondmovie) => secondmovie.movieInfo.totalRating - firstmovie.movieInfo.totalRating);
+};
+export {getMostCommentedMovies, getTopRatedMovies, getAlreadywatchedMoviesAmount, getWholewatchedMoviesRuntime, getSortedMoviesByDate, getSortedMoviesByRating};
