@@ -107,7 +107,7 @@ export default class Movie {
     }
   }
 
-  _setmoviePopupHandlers() {
+  _setMoviePopupHandlers() {
     this._moviePopupComponent.setCloseButtonClickHandler(this._handlePopupClose);
     this._moviePopupComponent.setDeleteCommentButtonClickHandler(this._handlePopupDeleteComment);
     this._moviePopupComponent.setCommentFormSubmitHandler(this._handleCommentFormSubmit);
@@ -130,7 +130,7 @@ export default class Movie {
       .then((comments) => {
         this._CommentsModel.setComments(comments);
         this._moviePopupComponent = new moviePopupView(this._movie, this._CommentsModel);
-        this._setmoviePopupHandlers();
+        this._setMoviePopupHandlers();
         this._siteBody.classList.add('hide-overflow');
         render(this._siteBody, this._moviePopupComponent);
         document.addEventListener('keydown', this._escapePressHandler);
@@ -138,7 +138,7 @@ export default class Movie {
       .catch(() => {
         this._CommentsModel.setComments([]);
         this._moviePopupComponent = new moviePopupView(this._movie, this._CommentsModel);
-        this._setmoviePopupHandlers();
+        this._setMoviePopupHandlers();
         this._siteBody.classList.add('hide-overflow');
         render(this._siteBody, this._moviePopupComponent);
         document.addEventListener('keydown', this._escapePressHandler);

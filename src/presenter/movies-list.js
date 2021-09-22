@@ -74,7 +74,7 @@ export default class MovieList {
     this._CommentsModel.removeObserver(this._handleCommentModelEvent);
   }
 
-  _getmovies() {
+  _getMovies() {
     const filterType = this._FilterModel.getFilter();
     const movies = this._MoviesModel.getmovies();
     const filteredMovies = filter[filterType](movies);
@@ -212,7 +212,7 @@ export default class MovieList {
     movies.forEach((movie) => this._renderMovie(container, movie, prefix));
   }
 
-  _renderMainmovies(movies) {
+  _renderMainMovies(movies) {
     this._renderMovies(movies, this._mainMoviesContainer);
   }
 
@@ -243,9 +243,9 @@ export default class MovieList {
   }
 
   _handleShowMoreButtonClick() {
-    const movieCount = this._getmovies().length;
+    const movieCount = this._getMovies().length;
     const newRenderedMovieCount = Math.min(movieCount, this._renderedMovieCount + MOVIES_PER_STEP);
-    const movies = this._getmovies().slice(this._renderedMovieCount, newRenderedMovieCount);
+    const movies = this._getMovies().slice(this._renderedMovieCount, newRenderedMovieCount);
     this._renderMovies(movies, this._mainMoviesContainer);
     this._renderedMovieCount = newRenderedMovieCount;
     if (this._renderedMovieCount >= movieCount) {
@@ -262,7 +262,7 @@ export default class MovieList {
       this._renderLoading();
       return;
     }
-    const movies = this._getmovies();
+    const movies = this._getMovies();
     const movieCount = movies.length;
     if (movieCount === 0) {
       this._renderNoMovie();
@@ -270,7 +270,7 @@ export default class MovieList {
     }
     render(this._movieListContainer, this._movieListComponent);
     this._renderSorting();
-    this._renderMainmovies(movies.slice(0, Math.min(movieCount, this._renderedMovieCount)));
+    this._renderMainMovies(movies.slice(0, Math.min(movieCount, this._renderedMovieCount)));
     if (movieCount > MOVIES_PER_STEP) {
       this._renderShowMoreButton();
     }
@@ -284,7 +284,7 @@ export default class MovieList {
   }
 
   _clearMovieList({resetRenderedMovieCount = false, resetSortingType = false} = {}) {
-    const movieCount = this._getmovies().length;
+    const movieCount = this._getMovies().length;
     Object
       .values(this._moviePresenter)
       .forEach((presenter) => presenter.destroy());
